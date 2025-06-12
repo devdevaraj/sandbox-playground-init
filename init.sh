@@ -33,7 +33,7 @@ config="{
   \"default-address-pools\": [
     {
       \"base\": \"172.22.0.0/16\",
-      \"size\": 24
+      \"size\": 30
     }
   ]
 }"
