@@ -18,7 +18,7 @@ echo \
   sudo tee /etc/apt/sources.list.d/docker.list > /dev/null
 sudo apt-get update
 
-sudo apt-get install docker-ce docker-ce-cli containerd.io docker-buildx-plugin docker-compose-plugin
+sudo apt-get install docker-ce docker-ce-cli containerd.io docker-buildx-plugin docker-compose-plugin -y
 
 # Change docker network pool
 
@@ -38,7 +38,7 @@ config="{
   ]
 }"
 
-sudo echo "$config" >> $DOCKER_NPOOL
+echo "$config" | sudo tee $DOCKER_NPOOL >> /dev/null
 
 # Install envoy proxy
 
@@ -59,6 +59,12 @@ sudo systemctl start envoy
 
 sudo systemctl disable systemd-resolved
 sudo systemctl stop systemd-resolved
+
+sudo rm /etc/resolv.conf
+cat <<EOF | sudo tee abcd.service
+nameserver 127.0.0.1
+nameserver 1.1.1.1
+EOF
 
 # Install PowerDNS and configure
 
