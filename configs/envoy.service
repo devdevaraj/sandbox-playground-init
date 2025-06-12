@@ -1,0 +1,12 @@
+[Unit]
+Description=Envoy Proxy
+After=network.target
+
+[Service]
+ExecStart=/usr/bin/envoy -c /etc/envoy/envoy.yaml --log-level info
+Restart=always
+StandardOutput=file:/var/log/envoy.log
+StandardError=file:/var/log/envoy_error.log
+
+[Install]
+WantedBy=multi-user.target
