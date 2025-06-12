@@ -61,7 +61,7 @@ sudo systemctl disable systemd-resolved
 sudo systemctl stop systemd-resolved
 
 sudo rm /etc/resolv.conf
-cat <<EOF | sudo tee abcd.service
+cat <<EOF | sudo tee /etc/resolv.conf
 nameserver 127.0.0.1
 nameserver 1.1.1.1
 EOF
